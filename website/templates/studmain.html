@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Main Page</title>
+    {% load static %}
+    <!-- Link to your original CSS -->
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+</head>
+<body>
+     <!-- Navbar -->
+     <header>
+        <a href="#" class="logo">
+        <img src="{% static 'logo.png' %}" ><!-- img logo -->
+        <img src="{% static 'logot.png' %}" alt="Logo">
+        </a>
+        <!-- Links -->
+        <form action="" method="get" class="search-form">
+            <h4>Search Event:</h4><input type="text" name="eid">
+            <input type="submit" value="SEARCH">
+        </form>
+        <ul class="navbar">
+            <li><a href="{% url 'studmain' %}">Student Dashboard</a></li>
+            <li><a href="{% url 'my_events' %}">My Events</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
+        </ul>
+    </header>
+    <!-- Content Section -->
+    <div class="content">
+        {% if search_results %}
+        <h2><center>Result:</center></h2>
+        <table>
+            <tr>
+                <th>Event ID</th>
+                <th>Event Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Venue</th>
+                <th>Join Event</th>
+            </tr>
+            {% for e in search_results %}
+            <tr>
+                <td>{{ e.eid }}</td>
+                <td>{{ e.ename }}</td>
+                <td>{{ e.sdate }}</td>
+                <td>{{ e.edate }}</td>
+                <td>{{ e.venue }}</td>
+                <td><a href="{% url 'details_ev' e.eid %}">Register</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2><center>Culture & Art Events of KPMIM</center></h2>
+        <table>
+            <tr>
+                <th>Event ID</th>
+                <th>Event Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Venue</th>
+                <th>Join Event</th>
+            </tr>
+            {% for e in ev %}
+            <tr>
+                <td>{{ e.eid }}</td>
+                <td>{{ e.ename }}</td>
+                <td>{{ e.sdate }}</td>
+                <td>{{ e.edate }}</td>
+                <td>{{ e.venue }}</td>
+                <td><a href="{% url 'details_ev' e.eid %}">JOIN</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+    <!--Footer-->
+    <section class="banner">
+        <p>&copy; KPMIM Culture & Art Events. All rights reserved.</p>
+        <h3>Culture & Art Events Website</h3>
+        <p>"Let's be creative in KPM Indera Mahkota"</p>
+    </section>
+</body>
+</html>

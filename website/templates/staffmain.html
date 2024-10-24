@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Main Page</title>
+    {% load static %}
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <a href="#" class="logo">
+        <img src="{% static 'logo.png' %}" ><!-- img logo -->
+        <img src="{% static 'logot.png' %}" alt="Logo">
+        </a>
+        <!-- Links -->
+        <ul class="navbar">
+            <li><a href="{% url 'staffmain' %}">Staff Dashboard</a></li>
+            <li><a href="{% url 'event' %}">Add Event</a></li>
+            <li><a href="{% url 'view_participants' %}">View Participants</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
+        </ul>
+    </header>
+
+    <!-- Conditionally show the event list if form has been submitted -->
+    <div class="content" id="resultDisplay" style="display: block;">
+        <h2><center>Event List:</center></h2>
+        <table>
+            <tr>
+                <th>Event ID</th>
+                <th>Event Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Venue</th>
+                <th>Staff Name</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+    
+            {% for e in ev %}
+            <tr>
+                <td>{{ e.eid }}</td>
+                <td>{{ e.ename }}</td>
+                <td>{{ e.sdate }}</td>
+                <td>{{ e.edate }}</td>
+                <td>{{ e.venue }}</td>
+                <td>{{ e.tid.tname }}</td>
+                <td><a href="{% url 'update_ev' e.eid %}">Update</a></td>
+                <td><a href="{% url 'delete_ev' e.eid %}">Delete</a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8">No events found.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+ <!--Footer-->
+ <section class="banner">
+    <p>&copy; KPMIM Culture & Art Events. All rights reserved.</p>
+    <h3>Culture & Art Events Website</h3>
+    <p>"Let's be creative in KPM Indera Mahkota"</p>
+</section>
+</body>
+</html>

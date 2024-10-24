@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Events</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <a href="#" class="logo">
+        <img src="{% static 'logo.png' %}" ><!-- img logo -->
+        <img src="{% static 'logot.png' %}" alt="Logo">u
+        </a>
+        <ul class="navbar">
+            <li><a href="{% url 'studmain' %}">Student Dashboard</a></li>
+            <li><a href="{% url 'my_events' %}">My Events</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
+        </ul>        
+    </header>
+<div class="content">
+    <h2><center>My Registered Events</center></h2>
+    <table>
+        <tr>
+            <th>Event ID</th>
+            <th>Event Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Venue</th>
+        </tr>
+        {% for event in joined_events %}
+        <tr>
+            <td>{{ event.eid }}</td>
+            <td>{{ event.ename }}</td>
+            <td>{{ event.sdate }}</td>
+            <td>{{ event.edate }}</td>
+            <td>{{ event.venue }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+    <!--Footer-->
+    <section class="banner">
+        <p>&copy; KPMIM Culture & Art Events. All rights reserved.</p>
+        <h3>Culture & Art Events Website</h3>
+        <p>"Let's be creative in KPM Indera Mahkota"</p>
+    </section>
+</body>
+</html>

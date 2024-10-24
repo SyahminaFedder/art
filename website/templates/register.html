@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">
+            <img src="{% static 'logo.png' %}" alt="Logo">
+            <img src="{% static 'logot.png' %}" alt="Logo">
+        </a>
+        <ul class="navbar">
+            <li><a href="{% url 'login' %}">Login</a></li>
+        </ul>
+    </header>
+    
+    <div class="center-container">
+        <form action="" method="post" class="form-container">
+            <h2>Sign Up</h2><br>
+            {% csrf_token %}
+            <div class="input">
+                <input type="text" name="id" placeholder="Enter your ID" required>
+                <input type="password" name="passw" placeholder="Enter your password" required>
+                <input type="text" name="name" placeholder="Enter your name" required>
+                <input type="text" name="phoneno" placeholder="Enter your phone number" required>
+                <input type="text" name="gender" placeholder="Enter your gender" style="display:none;">
+                <input type="text" name="programme" placeholder="Enter your programme" style="display:none;">
+                <input type="text" name="position" placeholder="Enter your position" style="display:none;">
+            </div>
+
+            <!-- Role Selection -->
+            <div class="input">
+                <label for="role">I am a:</label>
+                <select name="role" id="role" required onchange="showFields(this.value)">
+                    <option value="">Select</option>
+                    <option value="student">Student</option>
+                    <option value="staff">Staff</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+
+        <!-- Success or error message -->
+        {% if success_message %}
+        <div class="alert alert-success">{{ success_message }}</div>
+        {% endif %}
+        {% if error_message %}
+        <div class="alert alert-error">{{ error_message }}</div>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <section class="banner">
+        <p>&copy; KPMIM Culture & Art Events. All rights reserved.</p>
+        <h3>Culture & Art Events Website</h3>
+        <p>"Let's be creative in KPM Indera Mahkota"</p>
+    </section>
+
+    <script>
+        function showFields(role) {
+            document.querySelector('input[name="gender"]').style.display = 'none';
+            document.querySelector('input[name="programme"]').style.display = 'none';
+            document.querySelector('input[name="position"]').style.display = 'none';
+
+            if (role === 'student') {
+                document.querySelector('input[name="gender"]').style.display = 'block';
+                document.querySelector('input[name="programme"]').style.display = 'block';
+            } else if (role === 'staff') {
+                document.querySelector('input[name="position"]').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

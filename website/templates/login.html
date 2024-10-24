@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <a href="#" class="logo">
+            <img src="{% static 'logo.png' %}" alt="Logo">
+            <img src="{% static 'logot.png' %}" alt="Logo">
+        </a> 
+        <!-- Links -->
+        <ul class="navbar">
+            <li><a href="{% url 'register' %}">SignUp</a></li>
+        </ul>
+    </header>
+    
+    <!-- Flexbox for Left and Right Section -->
+    <div class="main-container" style="display: flex;">
+        <!-- Left Section with Background Image -->
+        <div class="left-section"style="flex: 1; background-image: url('{% static 'culbg.png' %}'); background-size: cover; background-position: center; padding: 150px; color: white;">
+            <h1>Welcome to</h1><span>KPMIM</span>
+            <div class="logo-title">
+                <h2>Culture & Art <br> Events</h2>
+            </div>
+        </div>
+
+        <!-- Right Section: Login Form -->
+        <div class="right-section" style="flex: 1; padding: 20px;">
+            <form action="" method="post">
+                <h2>Login</h2><br>
+                {% csrf_token %}
+                <div class="input">
+                    <input type="text" name="uid" placeholder="Enter your ID" required>
+                    <input type="password" name="passw" placeholder="Enter your Password" required>
+                </div>
+
+                <!-- Choosing elements -->
+                <div class="input">
+                    <label for="role">I am a:</label>
+                    <select name="role" id="role" required>
+                        <option value="student">Student</option>
+                        <option value="staff">Staff</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">Login</button>
+                <div class="register">
+                    <p>Don't have an account? <a href="{% url 'register' %}">Register Here</a></p> 
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if error_message %}
+        <center><div class="alert alert-danger" style="color: red;">{{ error_message }}</div></center><br>
+    {% endif %}
+
+    <!-- Footer -->
+    <section class="banner" style="text-align: center;">
+        <p>&copy; KPMIM Culture & Art Events. All rights reserved.</p>
+        <h3>Culture & Art Events Website</h3>
+        <p>"Let's be creative in KPM Indera Mahkota"</p>
+    </section>
+
+</body>
+</html>

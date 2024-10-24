@@ -1,0 +1,100 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Event</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+    <style>
+        form {
+        max-width: 400px;
+        margin: auto;
+        padding: 20px;
+        background-color: #f4f4f4;
+        border-radius: 10px;
+        }
+        label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        }
+        input[type="text"], input[type="date"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        }
+        .btn {
+        width: 100%;
+        padding: 10px;
+        background-color: #800000;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .btn:hover {
+        background-color: #800000b5;
+    }
+    .result {
+        margin-top: 20px;
+    }
+</style>
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">
+            <img src="{% static 'logo.png' %}">
+            <img src="{% static 'logot.png' %}" alt="Logo">
+        </a>
+        <ul class="navbar">
+            <li><a href="{% url 'staffmain' %}">Staff Dashboard</a></li>
+            <li><a href="{% url 'event' %}">Add Events</a></li>
+            <li><a href="{% url 'view_participants' %}">View Participants</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
+        </ul>
+    </header>
+
+    <!-- Conditionally show the input form if form has NOT been submitted -->
+    {% if not form_submitted %}
+    <form method="POST">
+        <h2><center>Add New Events</center></h2>
+        {% csrf_token %}
+        <label for="evid">Event ID:</label>
+        <input type="text" id="evid" name="evid" required><br>
+
+        <label for="evname">Event Name:</label>
+        <input type="text" id="evname" name="evname" required><br>
+
+        <label for="evs">Start Date:</label>
+        <input type="date" id="evs" name="evs" required><br>
+
+        <label for="eve">End Date:</label>
+        <input type="date" id="eve" name="eve" required><br>
+
+        <label for="evv">Venue:</label>
+        <input type="text" id="evv" name="evv" required><br>
+
+        <label for="staffid">Staff ID:</label>
+        <input type="text" id="staffid" name="staffid" required><br>
+
+        <button type="submit" class="btn" a href="{% url 'staffmain' %}"></a>SAVE</button>
+    </form>
+    {% endif %}
+
+    <!-- Error Message -->
+    {% if error_message %}
+    <div class="alert alert-danger" style="color: red;"><center>{{ error_message }}</center></div>
+    {% endif %}
+
+ <!--Footer-->
+ <section class="banner">
+    <p>&copy; KPMIM Culture & Art Events. All rights reserved.</p>
+    <h3>Culture & Art Events Website</h3>
+    <p>"Let's be creative in KPM Indera Mahkota"</p>
+</section>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Participants</title>
+    {% load static %}
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+    <style>
+        .content {
+    margin: 20px;
+}
+
+.event-section {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <a href="#" class="logo">
+        <img src="{% static 'logo.png' %}" alt="Logo">
+        <img src="{% static 'logot.png' %}" alt="Logo">
+        </a>
+        <!-- Links -->
+        <ul class="navbar">
+            <li><a href="{% url 'staffmain' %}">Staff Dashboard</a></li>
+            <li><a href="{% url 'event' %}">Add Event</a></li>
+            <li><a href="{% url 'view_participants' %}">View Participants</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
+        </ul>
+    </header>
+
+    <!-- Content section displaying events and participants -->
+    <center><div class="content">
+        <h2><center>Participants for Events</center></h2>
+
+        <!-- Loop through all events -->
+        {% for event in events %}
+        <div class="event-section">
+            <h3>{{ event.ename }} (Event ID: {{ event.eid }})</h3>
+            <table>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Phone Number</th>
+                </tr>
+                <!-- Loop through participants for each event -->
+                {% for student in event.participants %}
+                <tr>
+                    <td>{{ student.sid }}</td>
+                    <td>{{ student.sname }}</td>
+                    <td>{{ student.sphno }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No participants found for this event.</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <br>
+        {% empty %}
+        <p>No events found.</p>
+        {% endfor %}
+    </div></center>
+
+    <!-- Footer -->
+    <footer>
+        <section class="banner">
+            <p>&copy; KPMIM Culture & Art Events. All rights reserved.</p>
+            <h3>Culture & Art Events Website</h3>
+            <p>"Let's be creative in KPM Indera Mahkota"</p>
+        </section>
+    </footer>
+
+</body>
+</html>

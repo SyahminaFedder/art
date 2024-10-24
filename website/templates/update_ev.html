@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Event</title>
+    {% load static %}
+    <style>
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #d6c9c9;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: space-between;
+}
+
+/* Header/Navbar */
+header {
+    background-color: #6a2c2c;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+.nav-title {
+    margin-left: 5x; /* Space between logo and title */
+    font-size: 24px; /* Adjust font size as needed */
+    font-weight: bold; /* Make it bold */
+    color: white;
+    display: flex;
+}
+.navbar li {
+    display: inline-block;
+}
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+.navbar a:hover {
+    background-color:  #c38a8a;
+    border-radius: 5px;
+}
+
+.logo img {
+    height: 80px;
+}
+
+/* Form Styling */
+form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;  /* Max width for the form */
+    margin-bottom: 20px;
+    padding-top: 10px;
+    margin: 50px auto auto auto; /* Center the form horizontally */
+}
+
+form input[type="text"],
+form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0; /* Adds space between inputs */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form input[type="submit"] {
+    width: 100%;
+    background-color: #800000;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #d3a8a8;
+}
+
+/* Back Button Styling */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #800000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.banner {
+    background-color: #6a2c2c;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+}
+
+.banner p, .banner h3 {
+    margin: 5px 0;
+}
+
+.banner p:last-of-type {
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        width: 90%;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">
+            <img src="{% static 'logo.png' %}">
+            <img src="{% static 'logot.png' %}" alt="Logo">
+        </a>
+         <!-- Links -->
+         <ul class="navbar">
+            <li><a href="{% url 'staffmain' %}">Staff Dashboard</a></li>
+            <li><a href="{% url 'event' %}">Add Event</a></li>
+            <li><a href="{% url 'view_participants' %}">View Participants</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
+        </ul>
+    </header>
+    <form action="{% url 'save_update_ev' data.eid %}" method="post">
+        <h2><center>Update Event</center></h2>
+        {% csrf_token %}
+        Event ID: <input type="text" name="evid" value="{{ data.eid }}" disabled="false"> <br>
+        Event Name: <input type="text" name="evname" value="{{ data.ename }}"> <br>
+        Start Date: <input type="date" name="evs" value="{{ data.sdate }}"> <br>
+        End Date: <input type="date" name="eve" value="{{ data.edate }}"> <br>
+        Venue: <input type="text" name="evv" value="{{ data.venue }}"> <br>
+        Staff ID: <input type="text" name="staffid" value="{{ data.tid.tid }}"> <br>
+        <input type="submit" value="SAVE">
+    </form>
+    <br><br>
+    <a href="/kpmim/staffmain/"><center>BACK</center></a>
+<!--Footer-->
+ <section class="banner">
+    <p>&copy; KPMIM Culture & Art Events. All rights reserved.</p>
+    <h3>Culture & Art Events Website</h3>
+    <p>"Let's be creative in KPM Indera Mahkota"</p>
+</section>
+</body>
+</html>
